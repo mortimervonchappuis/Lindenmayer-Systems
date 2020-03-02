@@ -1,28 +1,19 @@
-import turtle
-from lindenmayer import Lindenmayer
+from translator import Translator
 
 
-class Hilbert:
-	def __init__(self, size=4):
-		self.size = size
-		self.mapping = {
-		'F': lambda: turtle.forward(self.size),
-		'-': lambda: turtle.left(90),
-		'+': lambda: turtle.right(90),
-		}
-		self.l_sys = Lindenmayer(axiom='X', rules={'X': '-YF+XFX+FY-', 'Y':'+XF-YFY-FX+'})
+axiom = 'X'
+rules = {
+'X': '-YF+XFX+FY-', 
+'Y':'+XF-YFY-FX+', 
+}
+mapping = {
+'F': 'move',
+'+': 'left',
+'-': 'right',
+}
 
-	def __call__(self, n):
-		turtle.speed(0)
-		turtle.hideturtle()
-		turtle.penup()
-		turtle.setposition((-self.size * 2**(n-1), -self.size * 2**(n-1)))
-		turtle.pendown()
-		for x in self.l_sys(n):
-			if x in self.mapping:
-				self.mapping[x]()
-		turtle.exitonclick()
+size = 4
+n = 7
 
-
-hilbert = Hilbert()
-hilbert(7)
+Hilbert = Translator(axiom, rules, mapping, size)
+Hilbert(n, position=(-size * 2**(n-1), -size * 2**(n-1)))
