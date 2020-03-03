@@ -13,7 +13,7 @@ mapping = {
 }
 
 size = 4
-n = 7
+n = 6
 
 Hilbert = Translator(axiom, rules, mapping, size)
 Hilbert(n, position=(-size * 2**(n-1), -size * 2**(n-1)))

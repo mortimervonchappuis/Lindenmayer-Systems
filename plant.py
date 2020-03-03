@@ -1,9 +1,10 @@
 from translator import Translator
 
+
 axiom = 'X'
 rules = {
 'X': 'F+[[X]-X]-F[-FX]+X', 
-'F': 'FF'
+'F': 'FF', 
 }
 mapping = {
 'F': 'move',
@@ -13,9 +14,9 @@ mapping = {
 ']': 'restore',
 }
 
-size = 1
+size = 6
 angle = 25
-n = 8
+n = 6
 
 Plant = Translator(axiom, rules, mapping, size, angle)
-Plant(n, position=(-200, -400), angle=90-angle)
+Plant(n, position=(-400, -400), angle=90-angle)

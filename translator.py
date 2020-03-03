@@ -1,5 +1,6 @@
 import turtle
 from lindenmayer import Lindenmayer
+from PIL import ImageTk
 
 
 class Translator:
@@ -42,17 +43,30 @@ class Translator:
 		elif command == 'restore':
 			self.restore()
 		elif type(command) in {tuple, list}:
-			for i in command:
-				self.process(i)
+			for v in enumerate(command):
+				self.process(v)
+				
 
-	def __call__(self, n, position=(0, 0), angle=90):
-		turtle.speed(0)
+	def __call__(self, n, position=(0, 0), angle=90, name=''):
+		try:
+			turtle.speed(0)
+		except:
+			pass
+		turtle.pencolor('white')
+		turtle.getcanvas().config(bg='black')
 		turtle.hideturtle()
 		turtle.penup()
 		turtle.setposition(position)
 		turtle.setheading(angle)
 		turtle.pendown()
-		for x in self.lindenmayer_system(n):
+		for i, x in enumerate(self.lindenmayer_system(n)):
 			self.process(x)
-		turtle.exitonclick()
+			#if (i % 27) == 0:
+			#	turtle.getcanvas().postscript(file=f"images/deconstruct/sierpinski_{str(i).zfill(4)}.eps")
+		#turtle.getcanvas().postscript(file=f"images/deconstruct/sierpinski_{str(i).zfill(4)}.eps")
+		if name:
+			turtle.getcanvas().postscript(file=f"images/eps/{name}_{str(self.angle).zfill(3)}.eps")#, colormode="color")
+			turtle.bye()
+		else:
+			turtle.exitonclick()
 

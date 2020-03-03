@@ -13,5 +13,3 @@ class Lindenmayer:
 		for _ in range(n):
 			string = self.process(string)
 		return string
-
-
