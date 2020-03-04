@@ -9,9 +9,9 @@ mapping = {
 '-': 'right',
 }
 
-size = 2
+size = 3.6
 angle = 45
-n = 16
+n = 12
 
 Levy = Translator(axiom, rules, mapping, size, angle)
-Levy(n)
+Levy(n, position=(-size * 2**(n/2-1), -size*n), angle=0, name='levy')

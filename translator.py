@@ -14,6 +14,11 @@ class Translator:
 	def move(self):
 		turtle.forward(self.size)
 
+	def jump(self):
+		turtle.penup()
+		self.move()
+		turtle.pendown()
+
 	def left(self):
 		turtle.left(self.angle)
 
@@ -34,6 +39,8 @@ class Translator:
 		command = self.mapping[x] if x in self.mapping else x
 		if command == 'move':
 			self.move()
+		elif command == 'jump':
+			self.jump()
 		elif command == 'left':
 			self.left()
 		elif command == 'right':
@@ -52,8 +59,8 @@ class Translator:
 			turtle.speed(0)
 		except:
 			pass
-		turtle.pencolor('white')
-		turtle.getcanvas().config(bg='black')
+		#turtle.pencolor('white')
+		#turtle.getcanvas().config(bg='black')
 		turtle.hideturtle()
 		turtle.penup()
 		turtle.setposition(position)
@@ -61,8 +68,8 @@ class Translator:
 		turtle.pendown()
 		for i, x in enumerate(self.lindenmayer_system(n)):
 			self.process(x)
-			#if (i % 27) == 0:
-			#	turtle.getcanvas().postscript(file=f"images/deconstruct/sierpinski_{str(i).zfill(4)}.eps")
+			if (i % 32) == 0:
+				turtle.getcanvas().postscript(file=f"images/eps/{name+str(i).zfill(5)}.eps")
 		#turtle.getcanvas().postscript(file=f"images/deconstruct/sierpinski_{str(i).zfill(4)}.eps")
 		if name:
 			turtle.getcanvas().postscript(file=f"images/eps/{name}_{str(self.angle).zfill(3)}.eps")#, colormode="color")
